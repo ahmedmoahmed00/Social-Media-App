@@ -39,7 +39,6 @@ function useGetMessages(userID, friendID, limit = 7) {
               if (!oldData) return { pages: [[newMessage]], pageParams: [1] };
 
               const allMessages = oldData.pages.flat();
-
               const exists = allMessages.some(
                 (msg) => msg.id === newMessage.id
               );
@@ -65,15 +64,15 @@ function useGetMessages(userID, friendID, limit = 7) {
     if (!data?.pages) return [];
     const uniqueMessages = new Map();
 
-    data.pages
-      .slice()
-      .reverse()
-      .flat()
-      .forEach((msg) => {
+    data.pages.forEach((page) => {
+      page.forEach((msg) => {
         uniqueMessages.set(msg.id, msg);
       });
+    });
 
-    return Array.from(uniqueMessages.values());
+    return Array.from(uniqueMessages.values()).sort(
+      (a, b) => new Date(a.created_at) - new Date(b.created_at)
+    );
   }, [data?.pages]);
 
   return {

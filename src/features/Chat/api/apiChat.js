@@ -10,12 +10,11 @@ export async function getMessages({ userID, friendID, page = 1, limit = 20 }) {
         user_uuid: userID,
         friend_uuid: friendID,
       })
-      .order("created_at", { ascending: false })
       .range(from, to);
 
     if (error) throw error;
 
-    return data;
+    return data.reverse();
   } catch (err) {
     console.error("Error fetching conversation:", err.message);
     return [];
