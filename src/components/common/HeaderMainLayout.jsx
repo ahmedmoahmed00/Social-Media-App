@@ -13,7 +13,7 @@ function HeaderMainLayout() {
   const { isDarkMode, toggleTheme } = useDarkMode();
 
   return (
-    <header className="bg-primary  sticky top-0 z-50 dark:bg-dark-primary border-b border-b-primary dark:border-dark-primary">
+    <header className="bg-primary  relative top-0 z-50 dark:bg-dark-primary border-b border-b-primary dark:border-dark-primary">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
         <h1 className="text-lg lg:text-xl font-bold text-primary dark:text-dark-primary truncate">
           <Link to="/">SocialConnect</Link>

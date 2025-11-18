@@ -7,7 +7,7 @@ function MainLayout() {
     <DarkModeProvider>
       <div className="bg-primary dark:bg-dark-primary flex flex-col min-h-screen">
         <HeaderMainLayout />
-        <div className="max-w-7xl w-full mx-auto mt-7 flex-1">
+        <div className="max-w-7xl w-full mx-auto mt-7 flex-1 mb-15 md:mb-0 ">
           <Outlet />
         </div>
       </div>

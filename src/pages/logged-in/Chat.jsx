@@ -10,7 +10,7 @@ function Chat() {
   }, [friendSelected]);
 
   return (
-    <div className="flex gap-4 max-[767px]:flex-col relative items-stretch mx-4 max-w-7xl  mb-20 ">
+    <div className="flex gap-4 max-[767px]:flex-col relative items-stretch mx-4 max-w-7xl   ">
       <div className="">
         <FriendsSidebar
           friendSelected={friendSelected}
