@@ -1,8 +1,8 @@
 User-agent: *
-Disallow: /admin/
+Disallow: /home/      
 Disallow: /login/
-Disallow: /register/
+Disallow: /chat/
 Allow: /
 
-# Sitemap
-Sitemap: https://social-media-app-git-main-ahmedmohammeds-projects.vercel.app/sitemap.xml
+# Sitemap 
+Sitemap: https://yourdomain.com/sitemap.xml
