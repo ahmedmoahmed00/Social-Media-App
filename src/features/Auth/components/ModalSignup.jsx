@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import FormSignup from "../forms/formSignup";
+import FormSignup from "../forms/FormSignup";
 import ModalAuth from "./ModalAuth";
 import SocialSignAndLog from "./SocialSignAndLog";
 

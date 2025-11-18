@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/logged-in/Home";
-import Login from "../pages/login";
+import Login from "../pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import Signup from "../pages/Signup";
@@ -13,7 +13,6 @@ import Settings from "../pages/logged-in/Settings";
 
 const router = createBrowserRouter([
   {
-    // ProtectedRoute
     path: "/",
     element: (
       <ProtectedRoute>
