@@ -4,11 +4,7 @@ import useSendMessage from "../hooks/Chat/useSendMessage";
 
 function CreateMessage({ userId, friendId }) {
   const [contentMessage, setContentMessage] = useState("");
-  const { sendMessage, isLoading, isError } = useSendMessage();
-
-  if (isError) {
-    console.log("ERRRRR");
-  }
+  const { sendMessage, isLoading } = useSendMessage();
 
   const handelSendMessage = useCallback(() => {
     if (contentMessage.length <= 0) return;
@@ -20,7 +16,6 @@ function CreateMessage({ userId, friendId }) {
     });
 
     setContentMessage("");
-    
   }, [contentMessage, userId, friendId, sendMessage]);
 
   useEffect(() => {

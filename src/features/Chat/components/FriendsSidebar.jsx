@@ -14,12 +14,6 @@ function FriendsSidebar({ friendSelected, setFriendSelected }) {
   const { data, isLoading } = useGetUserFriends(user?.id);
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      setFriendSelected(data[0]);
-    }
-  }, [data, setFriendSelected]);
-
-  useEffect(() => {
     if (friendSelected) {
       setFriendSelected(friendSelected);
     }

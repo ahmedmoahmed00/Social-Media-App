@@ -11,8 +11,6 @@ function ChatHeader({ setFriendSelected, friend }) {
     return <ChatHeaderSkeleton />;
   }
 
-  console.log(friend);
-
   return (
     <div className="w-full border-b border-b-gray-200  dark:border-gray-600 p-6  flex items-center justify-between">
       <div className="flex items-center gap-2">

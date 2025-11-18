@@ -1,7 +1,7 @@
 User-agent: *
-Disallow: /admin/      
+Disallow: /home/      
 Disallow: /login/
-Disallow: /register/
+Disallow: /chat/
 Allow: /
 
 # Sitemap 

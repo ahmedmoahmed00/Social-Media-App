@@ -13,10 +13,14 @@ function MessagesSection({ userId, friendId }) {
   const prevScrollHeightRef = useRef(0);
 
   useLayoutEffect(() => {
-    if (!isLoading && bottomRef.current) {
+    if (isLoading) return;
+
+    if (!dataMessages || dataMessages.length === 0) return;
+
+    if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ block: "end" });
     }
-  }, [isLoading]);
+  }, [isLoading, dataMessages?.length]);
 
   const handleFetchMore = async () => {
     const container = containerRef.current;
