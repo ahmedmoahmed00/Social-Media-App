@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@theme {
+  --main-size: 16px;
+
+  --radius-lg: 12px;
+
+  --padding-main: 24px;
+
+  --text-color-primary: black;
+  --text-color-dark-primary: white;
+  --border-color-main: #d1d5db;
+
+  --background-color-primary: white;
+  --background-color-dark-primary: #121212;
+
+  --border-color-primary: oklch(92.8% 0.006 264.531);
+  --border-color-dark-primary: oklch(44.6% 0.03 256.802);
+
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --ring: oklch(0.439 0 0);
+
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+}
+
+@layer components {
+  .input {
+    @apply rounded-full border border-stone-200 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3;
+  }
+
+  /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
+  .loader {
+    width: 80px;
+    padding: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #25b09b;
+    --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+    animation: loading 1s infinite linear;
+  }
+
+  @keyframes loading {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+@layer utilities {
+  .bg-muted-mix {
+    background-color: color-mix(in oklab, oklch(0.269 0 0) 60%, transparent);
+  }
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #8b8e92;
+  border-radius: 9999px;
+  border: 3px solid #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: #6c6e70;
+}
