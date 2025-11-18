@@ -5,4 +5,8 @@ Disallow: /chat/
 Allow: /
 
 # Sitemap 
+<<<<<<< HEAD
 Sitemap: https://yourdomain.com/sitemap.xml
+=======
+Sitemap: https://yourdomain.com/sitemap.xml
+>>>>>>> 8abfde3f571cf4c8b3752bb67bb12de4ef829c95
