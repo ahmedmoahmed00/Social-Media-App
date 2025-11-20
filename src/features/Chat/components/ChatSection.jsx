@@ -28,7 +28,7 @@ function ChatSection({ setFriendSelected, friendSelected }) {
         friend={friendSelected}
       />
 
-      <div className="h-[600px] flex flex-col">
+      <div className="max-h-[67vh] flex flex-col">
         <div className="flex overflow-y-auto  flex-col  p-4 gap-4 flex-1 ">
           <MassagesSection
             userId={user.id}

@@ -29,7 +29,7 @@ function FriendsSidebar({ friendSelected, setFriendSelected }) {
 
   return (
     <div className="flex h-full ">
-      <div className="min-[767px]:w-[320px]  max-[767px]:h-[720px] w-full border dark:border-gray-600 border-gray-200 rounded-lg flex-shrink-0">
+      <div className="min-[767px]:w-[320px] max-[767px]:h-[80vh] overflow-y-auto w-full border dark:border-gray-600 border-gray-200 rounded-lg flex-shrink-0">
         <div className="w-full flex flex-col gap-5 mb-5">
           <div className="p-4">
             <Input
@@ -38,7 +38,7 @@ function FriendsSidebar({ friendSelected, setFriendSelected }) {
               placeholder="Search conversations..."
             />
           </div>
-          <div className="divide-y w-full divide-gray-300">
+          <div className="divide-y w-full divide-gray-300  ">
             {isLoading && (
               <div className="w-full space-y-2">
                 <FriendCardSkeleton />

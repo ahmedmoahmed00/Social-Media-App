@@ -5,7 +5,7 @@ import SkeletonUserCard from "./ui/SkeletonUserCard";
 
 function ShowUsers({ users, isFetchingSearchUsers, isLoading }) {
   return (
-    <div className="p-4  rounded-lg border border-primary dark:border-dark-primary mt-6">
+    <div className=" rounded-lg border border-primary dark:border-dark-primary mt-6">
       {!isFetchingSearchUsers && !isLoading && (
         <div className="p-4 max-h-[400px] overflow-auto">
           <div>

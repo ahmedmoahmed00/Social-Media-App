@@ -6,7 +6,7 @@ function TrendingSearches() {
   const { data: trendingUsers, isLoading } = useGetTrendingUsers();
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 ">
       {isLoading &&
         Array.from({ length: 4 }).map((_, i) => <SkeletonUserCard key={i} />)}
       {trendingUsers?.length === 0 ? (
