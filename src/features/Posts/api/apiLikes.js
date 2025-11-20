@@ -24,3 +24,23 @@ export async function removeLike(userId, postId) {
     console.log("❌ Remove like error:", error.message);
   }
 }
+
+export async function isLikedByMe(userId, postId) {
+  try {
+    const { data, error } = await supabase
+      .from("likes")
+      .select("*")
+      .match({ user_id: userId, post_id: postId })
+      .maybeSingle();
+
+    if (error) {
+      console.log(" Supabase error:", error.message);
+      return false;
+    }
+
+    return Boolean(data);
+  } catch (error) {
+    console.log(" isLikedByMe unexpected error:", error.message);
+    return false;
+  }
+}
