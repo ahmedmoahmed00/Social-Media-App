@@ -27,7 +27,7 @@ function CommentsSection({ postId, onClose }) {
 
   return (
     <Modal onClose={onClose}>
-      <div className="md:py-3 md:px-4 h-[66vh] dark:bg-black flex flex-col ">
+      <div className="md:py-3 md:px-4 h-[65vh]   dark:bg-black flex flex-col ">
         <div className="flex-1 overflow-auto scrollable flex flex-col gap-4 pb-8 border-b border-b-primary dark:border-b-dark-primary">
           {isLoading && renderSkeletons()}
 
