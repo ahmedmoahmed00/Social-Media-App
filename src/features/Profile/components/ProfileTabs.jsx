@@ -12,10 +12,10 @@ function ProfileTabs({ onChange }) {
   return (
     <div className="mt-6 px-1 bg-gray-200 rounded-lg font-semibold relative">
       <div className="relative w-full">
-        <div className="flex justify-between items-center relative text-sm md:text-base">
+        <div className="flex justify-between items-center h-10 relative text-sm md:text-base">
           <button
             onClick={() => handleClick("posts")}
-            className={`w-full py-2 z-10 transition-colors duration-200  ${
+            className={`w-full py-2 z-10 h-full transition-colors duration-200  ${
               sectionActive === "posts"
                 ? "font-semibold dark:text-white "
                 : " cursor-pointer"
@@ -26,7 +26,7 @@ function ProfileTabs({ onChange }) {
 
           <button
             onClick={() => handleClick("media")}
-            className={`w-full py-2 z-10 transition-colors duration-200  ${
+            className={`w-full py-2 z-10 h-full transition-colors duration-200  ${
               sectionActive === "media"
                 ? "font-semibold dark:text-white"
                 : " cursor-pointer"
@@ -37,7 +37,7 @@ function ProfileTabs({ onChange }) {
         </div>
 
         <span
-          className={`absolute top-1 h-8 w-1/2 dark:bg-black bg-white rounded-lg shadow-md transition-all duration-300 ${
+          className={`absolute top-1 h-[80%] w-1/2 dark:bg-black bg-white rounded-lg shadow-md transition-all duration-300 ${
             sectionActive === "media" ? "left-1/2" : "left-0"
           }`}
         ></span>

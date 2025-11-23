@@ -38,13 +38,16 @@ function FormSignup() {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    console.log(data);
+    data.email = data.email.trim().toLowerCase();
+    data.userName = data.userName.trim().toLowerCase();
+    data.firstName = data.firstName.trim();
+    data.lastName = data.lastName.trim();
 
     if (termsAccepted) {
+      console.log("xxxx")
       signup(data);
     }
   };
-
 
   return (
     <>

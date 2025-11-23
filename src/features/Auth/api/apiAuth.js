@@ -89,35 +89,50 @@ export async function EditStatus(userId, active) {
 }
 
 export async function signUp(formData) {
-  const { email, userName, password, firstName, lastName, dateOfBirth } =
+  const { email, password, userName, firstName, lastName, dateOfBirth } =
     formData;
 
   try {
+    const { data: checkExistingUser, error: checkError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", email)
+      .single();
+
+    if (checkError && checkError.code !== "PGRST116") {
+      throw new Error(checkError.message);
+    }
+
+    if (checkExistingUser) {
+      throw new Error("Email already exists");
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (error) throw error;
+    if (error) throw new Error(error.message);
 
-    if (data?.user) {
-      const { error: insertError } = await supabase.from("users").insert([
-        {
-          id: data.user.id,
-          firstName,
-          lastName,
-          userName,
-          email,
-          dateOfBirth,
-        },
-      ]);
+    const { error: insertError } = await supabase.from("users").insert([
+      {
+        id: data.user.id,
+        firstName,
+        lastName,
+        userName,
+        email,
+        dateOfBirth,
+      },
+    ]);
 
-      if (insertError) throw insertError;
-    }
+    if (insertError) throw new Error(insertError.message);
 
-    return data;
+    return {
+      message: "Please check your email to confirm your account",
+      user: data.user,
+    };
   } catch (err) {
-    console.error("Sign-up error:", err);
-    throw err;
+    console.error("SignUp error:", err.message);
+    throw new Error(err.message);
   }
 }

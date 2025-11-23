@@ -6,13 +6,11 @@ export function useSignup() {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (data) => signUp(data),
     onSuccess: (data) => {
-      toast.success("Account created! Check your email.");
-
-      console.log("Signup success ✅", data);
+      toast.success(data.message);
     },
     onError: (err) => {
-      toast.error("❌ Email already in use.");
-      console.error("Signup failed ❌", err.message);
+      toast.error(err.message);
+      console.error("Signup failed", err.message);
     },
   });
 
