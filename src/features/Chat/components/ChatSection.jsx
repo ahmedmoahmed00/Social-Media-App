@@ -9,7 +9,7 @@ function ChatSection({ setFriendSelected, friendSelected }) {
 
   if (!friendSelected) {
     return (
-      <div className=" max-[767px]:hidden h-[720px] flex items-center justify-center border border-gray-200 rounded-lg">
+      <div className=" max-[767px]:hidden h-[79vh]   flex items-center justify-center border border-gray-200 rounded-lg">
         <div className="flex items-center flex-col">
           <BiMessageRounded className="size-20 mb-2" />
           <p className="text-gray-500 text-lg mb-2">Select a conversation</p>
@@ -22,13 +22,13 @@ function ChatSection({ setFriendSelected, friendSelected }) {
   }
 
   return (
-    <div className=" gap-6 border dark:border-gray-600 dark:bg-dark-primary  flex-1 rounded-xl flex-col flex w-full border-gray-200">
+    <div className=" gap-6 border h-[79vh]   dark:border-gray-600  dark:bg-dark-primary  flex-1 rounded-xl flex-col flex w-full border-gray-200">
       <ChatHeader
         setFriendSelected={setFriendSelected}
         friend={friendSelected}
       />
 
-      <div className="max-h-[67vh] flex flex-col">
+      <div className="max-h-[67vh] flex flex-col flex-1 ">
         <div className="flex overflow-y-auto  flex-col  p-4 gap-4 flex-1 ">
           <MassagesSection
             userId={user.id}
