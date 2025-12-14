@@ -10,6 +10,8 @@ import Profile from "../pages/logged-in/Profile";
 import Notifications from "../pages/logged-in/Notifications";
 import Search from "../pages/logged-in/Search";
 import Settings from "../pages/logged-in/Settings";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,22 @@ const router = createBrowserRouter([
     element: (
       <PublicRoute>
         <Signup />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/forgot-password",
+    element: (
+      <PublicRoute>
+        <ForgotPassword />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/reset-password",
+    element: (
+      <PublicRoute>
+        <ResetPasswordPage />
       </PublicRoute>
     ),
   },

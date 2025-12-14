@@ -16,15 +16,13 @@ function FriendCard({ friend, isActive }) {
     <div
       className={`${
         isActive && "bg-gray-200 dark:bg-gray-700"
-      } p-4 flex gap-3 dark:text-dark-primary dark:hover:dark:bg-gray-700 hover:bg-gray-200`}
+      } p-4 flex gap-3 items-center dark:text-dark-primary dark:hover:dark:bg-gray-700 hover:bg-gray-200`}
     >
-      <div className="size-12 rounded-full">
-        <img
-          className="rounded-full"
-          src={friend?.avatar_url}
-          alt="Avatar Friend"
-        />
-      </div>
+      <img
+        className=" w-10 h-10 rounded-full"
+        src={friend?.avatar_url}
+        alt="Avatar Friend"
+      />
 
       <div className="w-full">
         <div className="mb-1 flex items-center justify-between w-full">

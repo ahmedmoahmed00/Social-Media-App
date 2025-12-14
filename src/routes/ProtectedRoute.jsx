@@ -2,24 +2,22 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "../components/ui/Loader";
 import { useUser } from "../features/Auth/hooks/auth/useUser";
-
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
+  const { isLoading, user, isAuthenticated } = useUser();
 
-  const { isLoading, isAuthenticated } = useUser();
-
-  useEffect(
-    function () {
-      if (!isAuthenticated && !isLoading) navigate("/login");
-    },
-    [isAuthenticated, isLoading, navigate]
-  );
+  useEffect(() => {
+    if (
+      (!isAuthenticated && !isLoading) ||
+      (user?.recovery_sent_at && !user?.password_changed_at)
+    ) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, isLoading, user, navigate]);
 
   if (isLoading) return <Loader />;
 
-  if (isAuthenticated) {
-    return children;
-  }
+  return children;
 }
 
 export default ProtectedRoute;

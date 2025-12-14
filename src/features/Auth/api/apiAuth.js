@@ -136,3 +136,52 @@ export async function signUp(formData) {
     throw new Error(err.message);
   }
 }
+
+export async function forgotPassword(email) {
+  if (!email || !email.includes("@")) {
+    throw new Error("Please enter a valid email.");
+  }
+
+  try {
+    const { data } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", email)
+      .single();
+
+    if (!data) {
+      throw new Error("Email does not exist.");
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+
+    if (error) {
+      console.error("Supabase forgot password error:", error.message);
+      throw new Error("Error sending the password reset link");
+    }
+
+    console.log(error);
+
+    return { message: `Password reset link sent to ${email}` };
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    throw err;
+  }
+}
+
+export async function resetPassword(newPassword) {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) throw new Error(error.message);
+
+    return data;
+  } catch (err) {
+    console.error("Reset password error:", err);
+    throw err;
+  }
+}

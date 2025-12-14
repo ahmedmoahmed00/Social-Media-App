@@ -6,6 +6,7 @@ import { PiSignIn } from "react-icons/pi";
 import { EMAIL_REGEX } from "../../../config/validation";
 import useLogin from "../hooks/auth/useLogin";
 import Loader from "../../../components/ui/Loader";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const { login, isLoading, isError } = useLogin();
@@ -60,8 +61,10 @@ function LoginForm() {
             </div>
           )}
         </div>
-        <div>
-          <p className="font-bold text-sm text-right">Forgot password?</p>
+        <div className="text-right">
+          <Link to="/forgot-password" className="font-bold text-sm text-right">
+            Forgot password?
+          </Link>
         </div>
         <SubmitButton Icon={PiSignIn} label={"Sign In"} />
       </form>

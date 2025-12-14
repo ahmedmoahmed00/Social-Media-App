@@ -23,9 +23,9 @@ function ChatHeader({ setFriendSelected, friend }) {
           </button>
         </div>
         <div>
-          <div className="w-10 rounded-full">
+          <div className=" size-10 rounded-full">
             <img
-              className="rounded-full"
+              className="rounded-full size-10"
               src={friend.avatar_url || DefualtAvatar}
               alt="Defualt Avatar"
             />

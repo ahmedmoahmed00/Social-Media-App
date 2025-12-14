@@ -4,13 +4,17 @@ import { useUser } from "../features/Auth/hooks/auth/useUser";
 import Loader from "../components/ui/Loader";
 
 function PublicRoute({ children }) {
-  const { isLoading, isAuthenticated } = useUser();
-
+  const { isLoading, isAuthenticated, user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) navigate("/");
-  }, [isAuthenticated, isLoading, navigate]);
+    if (
+      !isLoading &&
+      isAuthenticated &&
+      !(user?.recovery_sent_at && !user?.password_changed_at)
+    )
+      navigate("/");
+  }, [isAuthenticated, isLoading, user, navigate]);
 
   if (isLoading) return <Loader />;
 
