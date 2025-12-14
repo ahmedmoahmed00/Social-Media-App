@@ -13,6 +13,7 @@ import Settings from "../pages/logged-in/Settings";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import ProtectedResetPassword from "./ProtectedResetPassword ";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {

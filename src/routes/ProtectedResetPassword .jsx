@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../features/Auth/hooks/auth/useUser";
 
-const ProtectedResetPassword = ({ children, user }) => {
+const ProtectedResetPassword = ({ children }) => {
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(null);
+  const { user } = useUser();
 
   useEffect(() => {
     const checkToken = () => {

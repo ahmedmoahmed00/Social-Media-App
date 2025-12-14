@@ -7,6 +7,7 @@ function useResetPassword() {
     mutate: resetPassword,
     isPending: isLoading,
     isError,
+    isSuccess,
   } = useMutation({
     mutationFn: ({ newpassword }) => apiResetPassword(newpassword),
     onSuccess: (data) => {
@@ -19,7 +20,7 @@ function useResetPassword() {
     },
   });
 
-  return { resetPassword, isLoading, isError };
+  return { resetPassword, isSuccess, isLoading, isError };
 }
 
 export default useResetPassword;

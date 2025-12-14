@@ -7,6 +7,7 @@ function PublicRoute({ children }) {
   const { isLoading, isAuthenticated, user } = useUser();
   const navigate = useNavigate();
 
+  console.log(user);
   useEffect(() => {
     if (
       !isLoading &&

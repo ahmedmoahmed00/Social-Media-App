@@ -6,6 +6,8 @@ import Input from "../components/form/Input";
 import SubmitButton from "../components/ui/SubmitButton";
 import { toast } from "react-toastify";
 import useResetPassword from "../features/Auth/hooks/auth/useResetPassword";
+import { Link } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 const rules = [
   { label: "At least 8 characters", test: (pw) => pw.length >= 8 },
@@ -16,7 +18,8 @@ const rules = [
 
 function ResetPasswordPage() {
   const [hasNonEnglish, setHasNonEnglish] = useState(false);
-  const { resetPassword, isLoading } = useResetPassword();
+  const { resetPassword, isSuccess, isLoading } = useResetPassword();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -37,6 +40,12 @@ function ResetPasswordPage() {
     rules.every((rule) => rule.test(newPassword || "")) &&
     !hasNonEnglish &&
     newPassword === confirmPassword;
+
+  useEffect(() => {
+    if (isSuccess) {
+      window.location.reload();
+    }
+  }, [isSuccess, queryClient]);
 
   const onSubmit = async (data) => {
     if (!isPasswordValid) {
@@ -101,6 +110,10 @@ function ResetPasswordPage() {
               textSize="text-sm"
               label="Reset Password"
             />
+
+            <Link className="p-1 text-sm text-gray-500 text-center" to="/login">
+              Back to Login
+            </Link>
           </form>
         </div>
       </ModalAuth>
