@@ -12,6 +12,7 @@ import Search from "../pages/logged-in/Search";
 import Settings from "../pages/logged-in/Settings";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
+import ProtectedResetPassword from "./ProtectedResetPassword ";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,9 @@ const router = createBrowserRouter([
     path: "/reset-password",
     element: (
       <PublicRoute>
-        <ResetPasswordPage />
+        <ProtectedResetPassword>
+          <ResetPasswordPage />
+        </ProtectedResetPassword>
       </PublicRoute>
     ),
   },

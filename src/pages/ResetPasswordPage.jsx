@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import PasswordStrength from "../features/Auth/components/PasswordStrength";
 import ModalAuth from "../features/Auth/components/ModalAuth";
@@ -17,7 +16,6 @@ const rules = [
 
 function ResetPasswordPage() {
   const [hasNonEnglish, setHasNonEnglish] = useState(false);
-  const [linkValid, setLinkValid] = useState(true);
   const { resetPassword, isLoading } = useResetPassword();
 
   const {
@@ -40,14 +38,6 @@ function ResetPasswordPage() {
     !hasNonEnglish &&
     newPassword === confirmPassword;
 
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes("error=")) setLinkValid(false);
-    else setLinkValid(true);
-
-    window.history.replaceState(null, "", window.location.pathname);
-  }, []);
-
   const onSubmit = async (data) => {
     if (!isPasswordValid) {
       toast.error(
@@ -58,8 +48,6 @@ function ResetPasswordPage() {
 
     resetPassword({ newpassword: data.newPassword });
   };
-
-  if (!linkValid) return <div>Link is invalid or expired</div>;
 
   return (
     <div className="container mx-auto text-center flex flex-col items-center space-y-5 h-screen justify-center">
@@ -113,13 +101,6 @@ function ResetPasswordPage() {
               textSize="text-sm"
               label="Reset Password"
             />
-
-            <Link
-              className="text-sm text-center p-1 text-gray-500 hover:text-black transition duration-300"
-              to="/login"
-            >
-              Back to login
-            </Link>
           </form>
         </div>
       </ModalAuth>
