@@ -8,12 +8,7 @@ function PublicRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      !isLoading &&
-      isAuthenticated &&
-      !(user?.recovery_sent_at && !user?.password_changed_at)
-    )
-      navigate("/");
+    if (!isLoading && isAuthenticated) navigate("/");
   }, [isAuthenticated, isLoading, user, navigate]);
 
   if (isLoading) return <Loader />;
