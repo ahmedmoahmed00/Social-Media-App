@@ -14,7 +14,9 @@ function PublicRoute({ children }) {
       isAuthenticated &&
       !(user?.recovery_sent_at && !user?.password_changed_at)
     )
-      navigate("/");
+      console.log("Valid");
+    console.log(user);
+    navigate("/");
   }, [isAuthenticated, isLoading, user, navigate]);
 
   if (isLoading) return <Loader />;
