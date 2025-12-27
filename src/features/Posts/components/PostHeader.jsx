@@ -6,6 +6,7 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { toast } from "react-toastify";
 import useDeletePost from "../hooks/Posts/useDeletePost";
 import useUserData from "../../../hooks/queryHooks/useUserData";
+import { Link } from "react-router-dom";
 
 function PostHeader({ author, postId }) {
   const [openPostOptions, setOpenPostOptions] = useState(false);
@@ -23,19 +24,25 @@ function PostHeader({ author, postId }) {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="size-10 rounded-full">
-          <img
-            src={author?.avatar_url}
-            loading="lazy"
-            alt="Avatar"
-            className="rounded-full size-10"
-          />
-        </div>
+        <Link to={`/profile/${author.id}`}>
+          <div className="size-10 rounded-full">
+            <img
+              src={author?.avatar_url}
+              loading="lazy"
+              alt="Avatar"
+              className="rounded-full size-10"
+            />
+          </div>
+        </Link>
         <div className="dark:text-white ">
-          <h2 className="text-sm font-semibold">{author.full_name}</h2>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            @{author.username || author.userName}
-          </p>
+          <Link className="hover:underline" to={`/profile/${author.id}`}>
+            <h2 className="text-sm font-semibold">{author.full_name}</h2>
+          </Link>
+          <Link to={`/profile/${author.id}`}>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              @{author.username || author.userName}
+            </p>
+          </Link>
         </div>
       </div>
       {postHasUser && (

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useOutsideClick } from "../../../../hooks/useOutsideClick";
 
-function Modal({ children, onClose }) {
+function CommentSectionModel({ children, onClose }) {
   const ref = useOutsideClick(onClose);
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -11,11 +11,11 @@ function Modal({ children, onClose }) {
   }, []);
 
   return (
-    <div>
-      <div className="fixed z-50  inset-0 bg-black/30 "></div>
+    <div className="h-screen md:h-fit">
+      <div className="fixed z-50 hidden md:block inset-0 bg-black/30 "></div>
       <div
         ref={ref}
-        className="flex border border-primary shadow-lg flex-col z-100 gap-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary dark:bg-dark-primary p-4 w-[95%] max-w-2xl rounded-lg"
+        className="flex border rounded-t-lg border-primary shadow-lg flex-col w-screen h-full md:h-fit  z-100 gap-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary dark:bg-dark-primary p-4 md:w-[95%] max-w-2xl md:rounded-lg"
       >
         <header className="flex items-center justify-between border-b border-b-primary dark:border-dark-primary pb-4">
           <h1 className="font-semibold dark:text-dark-primary text-lg lg:text-xl">
@@ -35,4 +35,4 @@ function Modal({ children, onClose }) {
   );
 }
 
-export default Modal;
+export default CommentSectionModel;

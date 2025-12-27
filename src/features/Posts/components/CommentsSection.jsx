@@ -5,6 +5,8 @@ import useGetCommentsPost from "../hooks/Comments/useGetCommentsPost";
 import CommentSkeleton from "./ui/CommentSkeleton";
 import CommentBox from "./ui/CommentBox";
 import ScrollTrigger from "./ScrollTrigger";
+import useUserData from "../../../hooks/queryHooks/useUserData";
+import CommentSectionModel from "./ui/CommentSectionModel";
 
 const LIMIT = 7;
 
@@ -16,6 +18,7 @@ function CommentsSection({ postId, onClose }) {
     hasNextPage,
     isFetchingNextPage,
   } = useGetCommentsPost(LIMIT, postId);
+  const user = useUserData();
 
   const handleReachEnd = () => {
     if (!hasNextPage || isFetchingNextPage) return;
@@ -26,8 +29,8 @@ function CommentsSection({ postId, onClose }) {
     Array.from({ length: count }).map((_, i) => <CommentSkeleton key={i} />);
 
   return (
-    <Modal onClose={onClose}>
-      <div className="md:py-3 md:px-4 h-[65vh]   dark:bg-black flex flex-col ">
+    <CommentSectionModel onClose={onClose}>
+      <div className="md:py-3 md:px-4 h-[77vh]   dark:bg-black flex flex-col ">
         <div className="flex-1 overflow-auto scrollable flex flex-col gap-4 pb-8 border-b border-b-primary dark:border-b-dark-primary">
           {isLoading && renderSkeletons()}
 
@@ -43,19 +46,18 @@ function CommentsSection({ postId, onClose }) {
 
           <ScrollTrigger onReach={handleReachEnd} />
         </div>
-
         <div className="flex items-start gap-2 pt-4">
           <div className="w-10 rounded-full">
             <img
               className="w-10 rounded-full"
-              src={DefualtAvatar}
+              src={user.avatar_url}
               alt="User Avatar"
             />
           </div>
-          <CreateComment postId={postId} />
+          <CreateComment postId={postId} user={user} />
         </div>
       </div>
-    </Modal>
+    </CommentSectionModel>
   );
 }
 

@@ -5,9 +5,12 @@ import useAddLike from "../hooks/Likes/useAddLike";
 import useRemoveLike from "../hooks/Likes/useRemoveLike";
 import useUserData from "../../../hooks/queryHooks/useUserData";
 import CommentsSection from "./CommentsSection";
+import { useShare } from "../hooks/Posts/useShare";
 
 function PostActions({ postId, likesCount, commentsCount, isLikedByMe }) {
   const [showCommentSection, setShowCommentSection] = useState(false);
+  const { share: sharePost, success, error } = useShare();
+
   const [optimisticLikes, setOptimisticLikes] = useState(likesCount);
   const [optimisticLiked, setOptimisticLiked] = useState(isLikedByMe);
 
@@ -75,7 +78,16 @@ function PostActions({ postId, likesCount, commentsCount, isLikedByMe }) {
         />
       )}
 
-      <button className="flex items-center cursor-pointer gap-2 text-sm font-semibold p-2 dark:text-white hover:bg-gray-200 rounded-md">
+      <button
+        onClick={() =>
+          sharePost({
+            title: "Check out this post!",
+            text: "I found this post interesting and wanted to share it with you.",
+            url: window.location.href,
+          })
+        }
+        className="flex items-center cursor-pointer gap-2 text-sm font-semibold p-2 dark:text-white hover:bg-gray-200 rounded-md"
+      >
         <MdOutlineIosShare className="w-5 h-5 text-gray-400" />
         <span>Share</span>
       </button>

@@ -19,6 +19,8 @@ function PublicRoute({ children }) {
     }
   }, [isAuthenticated, isLoading, user, navigate]);
 
+  console.log("user", user);
+
   if (isLoading) return <Loader />;
 
   return children;
