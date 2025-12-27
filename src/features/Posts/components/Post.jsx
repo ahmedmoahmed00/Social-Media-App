@@ -21,11 +21,11 @@ function Post({ post }) {
       )}
 
       {hasImage && (
-        <figure className="w-full h-50 overflow-hidden rounded-md">
+        <figure className="w-full h-75 overflow-hidden rounded-md">
           <img
             src={post.media_url}
             alt={post.content || "Post image"}
-            className="w-full h-auto object-contain"
+            className="h-full w-full object-contain"
           />
         </figure>
       )}
