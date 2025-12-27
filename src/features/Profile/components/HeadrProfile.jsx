@@ -22,13 +22,14 @@ function HeadrProfile({
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
       </div>
       <div className="p-6">
-        <div className="size-24 -mt-13 mb-2 md:mb-0 max-[767px]:mx-auto relative ">
+        <div className="size-24 -mt-13 mb-2 md:mb-0 max-[767px]:mx-auto relative overflow-hidden rounded-full">
           <img
-            className="size-24 object-cover rounded-full "
+            className="w-full h-full object-cover"
             src={user?.user_data.avatar_url}
-            alt={"User Avatar"}
+            alt="User Avatar"
           />
         </div>
+
         {!isProfileOwnUser && (
           <ActionsProfile friendID={friendID} userID={userID} />
         )}

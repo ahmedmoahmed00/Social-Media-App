@@ -19,10 +19,10 @@ function FriendCard({ friend, isActive }) {
       } p-4 flex gap-3 items-center dark:text-dark-primary dark:hover:dark:bg-gray-700 hover:bg-gray-200`}
     >
       <img
-        className=" w-10 h-10 rounded-full"
+        className="w-10 h-10 rounded-full shrink-0 object-cover"
         src={friend?.avatar_url}
         alt="Avatar Friend"
-      />
+      />ذ
 
       <div className="w-full">
         <div className="mb-1 flex items-center justify-between w-full">
