@@ -14,7 +14,7 @@ function Profile() {
 
   const [sectionActive, setSectionActive] = useState("posts");
 
-  let userID = id || user.id;
+  let userID = user.id;
 
   const { posts, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetPostsByID(userID);
