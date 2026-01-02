@@ -36,7 +36,7 @@ function ChatSection({ setFriendSelected, friendSelected }) {
           />
         </div>
 
-        <div className="p-3 lg:p-4 border-t dark:border-gray-600 border-t-gray-200">
+        <div className="p-3 h-22 lg:p-4 border-t dark:border-gray-600 border-t-gray-200">
           <CreateMessage
             userId={user.id}
             friendId={friendSelected?.friend_id || null}

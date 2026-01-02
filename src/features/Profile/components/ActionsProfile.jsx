@@ -5,9 +5,12 @@ import useCheckIsFriend from "../hooks/Friends/useCheckIsFriend";
 import { FiUserMinus, FiUserPlus } from "react-icons/fi";
 import useRemoveSendFriendRequest from "../hooks/Friends/useRemoveSendFriendRequest";
 import { Link } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 function ActionsProfile({ userID, friendID }) {
   const { data: isFriend, isLoading } = useCheckIsFriend(userID, friendID);
+
+  const queryClient = useQueryClient();
 
   const { removeFriend } = useRemoveFriend();
   const { sendFriendRequest } = useSendFriendRequest();
@@ -36,6 +39,10 @@ function ActionsProfile({ userID, friendID }) {
 
       setFriendRequestSent(true);
     }
+
+    queryClient.invalidateQueries({
+      queryKey: ["checkIsFriend", userID, friendID],
+    });
   };
 
   const handleCancelFriendRequest = () => {
