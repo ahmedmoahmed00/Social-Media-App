@@ -7,7 +7,6 @@ function Post({ post }) {
 
   const hasImage = Boolean(post.media_url);
 
-  console.log("post.isLikedByMe", post);
   return (
     <article
       className="p-main border flex flex-col gap-4 rounded-lg border-primary dark:border-dark-primary"

@@ -34,15 +34,17 @@ function Profile() {
     fetchNextPage();
   };
 
+  const isProfileOwnUser = id === undefined || id === userID;
+
   return (
     <div className="mx-4 max-w-5xl md:mx-auto ">
       <div>
         <HeadrProfile
           friendID={id}
-          userID={user.id}
+          userID={userID}
           profileUserId={userID}
           user={userData[0]}
-          isProfileOwnUser={userData[0].user_data.id === user.id}
+          isProfileOwnUser={isProfileOwnUser}
           PostsCount={posts?.length}
         />
       </div>

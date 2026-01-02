@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import DefualtAvatar from "../../../../assets/User imgs/DefualtAvatar.jpg";
 
 function UserCard({ user, index }) {
-  console.log(user);
   return (
     <div className="flex flex-col gap-4 not-last:border-b border-gray-200 dark:border-dark-primary pb-4">
       <div className="flex items-center gap-3">
