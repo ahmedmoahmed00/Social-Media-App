@@ -36,8 +36,6 @@ function Profile() {
     fetchNextPage();
   };
 
-  const isProfileOwnUser = id === undefined || id === userID;
-
   return (
     <div className="mx-4 max-w-5xl md:mx-auto ">
       <div>
@@ -46,7 +44,7 @@ function Profile() {
           userID={userID}
           profileUserId={userID}
           user={userData[0]}
-          isProfileOwnUser={isProfileOwnUser}
+          isProfileOwnUser={profileOwnUser}
           PostsCount={posts?.length}
         />
       </div>
