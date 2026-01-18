@@ -37,7 +37,9 @@ function HeadrProfile({
           <p className="text-gray-600">@{user.user_data.userName}</p>
         </div>
         <div className="mt-4 dark:text-white text-center md:text-left">
-          <p className=" text-sm lg:text-base">{user.user_data.bio || "xxx"}</p>
+          <p className=" text-sm lg:text-base">
+            {user.user_data.bio || "No bio yet."}
+          </p>
         </div>
         <div className="mt-4 justify-center md:justify-start dark:text-white flex items-center gap-4">
           <p>
