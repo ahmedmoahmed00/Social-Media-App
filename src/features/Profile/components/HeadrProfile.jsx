@@ -1,16 +1,13 @@
 import { formatNumber } from "../../../utils/helpers";
-import useGetCountPostsByID from "../hooks/Posts/useGetCountPostsByID";
 import ActionsProfile from "./ActionsProfile";
 
 function HeadrProfile({
   friendID,
   userID,
-  profileUserId,
   user,
   isProfileOwnUser,
+  postsCount,
 }) {
-  const { count: PostsCount, isLoading } = useGetCountPostsByID(profileUserId);
-
   return (
     <div className="rounded-lg overflow-hidden border border-primary dark:border-dark-primary">
       <div className="w-full h-50 relative overflow-hidden ">
@@ -51,7 +48,7 @@ function HeadrProfile({
           </p>
           <p>
             <span className="font-semibold text-sm lg:text-base">
-              {formatNumber(isLoading ? 0 : PostsCount || 0)}
+              {formatNumber(postsCount || 0)}
             </span>{" "}
             <span>Posts</span>
           </p>

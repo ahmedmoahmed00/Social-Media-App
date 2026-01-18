@@ -45,7 +45,7 @@ function Profile() {
           profileUserId={userID}
           user={userData[0]}
           isProfileOwnUser={profileOwnUser}
-          PostsCount={posts?.length}
+          postsCount={posts?.length}
         />
       </div>
       <div>
