@@ -21,6 +21,7 @@ function useGetAllPostsInfinite(limit = 9, userId) {
       GetPostsWithMeta({ page: pageParam, limit, userId }),
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length < limit) return undefined;
+
       return allPages.length + 1;
     },
     staleTime: 1000 * 60 * 5,
