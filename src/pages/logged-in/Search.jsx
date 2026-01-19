@@ -30,8 +30,9 @@ function Search() {
       </HeaderSearch>
 
       <ShowUsers
-        isFetchingSearchUsers={isFetchingSearchUsers}
         users={users}
+        userId={user.id}
+        isFetchingSearchUsers={isFetchingSearchUsers}
         isLoading={isPending}
       />
     </div>

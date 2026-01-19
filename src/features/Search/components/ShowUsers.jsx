@@ -3,7 +3,7 @@ import UserCard from "./ui/UserCard";
 import TrendingSearches from "./TrendingSearches";
 import SkeletonUserCard from "./ui/SkeletonUserCard";
 
-function ShowUsers({ users, isFetchingSearchUsers, isLoading }) {
+function ShowUsers({ users, userId, isFetchingSearchUsers, isLoading }) {
   return (
     <div className=" rounded-lg border border-primary dark:border-dark-primary mt-6">
       {!isFetchingSearchUsers && !isLoading && (
@@ -19,7 +19,7 @@ function ShowUsers({ users, isFetchingSearchUsers, isLoading }) {
             </h2>
           </div>
           <div className="mt-5    ">
-            <TrendingSearches />
+            <TrendingSearches userId={userId} />
           </div>
         </div>
       )}

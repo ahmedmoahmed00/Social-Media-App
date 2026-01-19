@@ -41,7 +41,7 @@ function Profile() {
       <div>
         <HeadrProfile
           friendID={id}
-          userID={userID}
+          userID={user.id}
           profileUserId={userID}
           user={userData[0]}
           isProfileOwnUser={profileOwnUser}

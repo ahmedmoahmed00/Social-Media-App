@@ -1,11 +1,12 @@
 import { supabase } from "../../../services/supabase";
 
-export async function getTrendingUsers() {
+export async function getTrendingUsers(userId) {
   try {
     let { data: users, error } = await supabase
       .from("users")
       .select("*")
-      .range(0, 4);
+      .range(0, 4)
+      .neq("id", userId);
 
     if (error) {
       throw error;
@@ -23,7 +24,7 @@ export async function getSearchUsers(search, userID) {
       .from("users")
       .select("*")
       .or(`userName.ilike.%${search}%,full_name.ilike.%${search}%`)
-      .neq("id", userID); // هنا استبعاد المستخدم الحالي
+      .neq("id", userID);
 
     if (error) {
       throw error;

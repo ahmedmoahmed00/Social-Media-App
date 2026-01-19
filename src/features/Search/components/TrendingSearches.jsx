@@ -2,8 +2,8 @@ import useGetTrendingUsers from "../hooks/users/useGetTrendingUsers";
 import SkeletonUserCard from "./ui/SkeletonUserCard";
 import UserCard from "./ui/UserCard";
 
-function TrendingSearches() {
-  const { data: trendingUsers, isLoading } = useGetTrendingUsers();
+function TrendingSearches({ userId }) {
+  const { data: trendingUsers, isLoading } = useGetTrendingUsers(userId);
 
   return (
     <div className="flex flex-col gap-6 ">
