@@ -36,7 +36,8 @@ function FriendCard({ friend, isActive }) {
 
         <div className="flex items-center justify-between w-full">
           <p className="text-xs border border-gray-300 min-h-6 rounded-md pl-1 w-full text-left lg:text-sm truncate pr-2">
-            {lastMessage?.content || "Start a conversation"}
+            {lastMessage?.content.slice(0, 20) + "..." ||
+              "Start a conversation"}
           </p>
         </div>
       </div>
