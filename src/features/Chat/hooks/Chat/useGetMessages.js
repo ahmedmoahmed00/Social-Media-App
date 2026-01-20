@@ -45,8 +45,6 @@ function useGetMessages(userID, friendID, limit = 7) {
 
           if (!isRelated) return;
 
-          console.log("New message received:", newMessage);
-
           queryClient.setQueryData(
             ["messages", userID, friendID],
             (oldData) => {
