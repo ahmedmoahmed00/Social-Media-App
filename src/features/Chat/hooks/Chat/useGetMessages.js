@@ -26,12 +26,26 @@ function useGetMessages(userID, friendID, limit = 7) {
 
   useEffect(() => {
     const channel = supabase
-      .channel("message-changes")
+      .channel(`messages-${userID}-${friendID}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "messages" },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+        },
         (payload) => {
           const newMessage = payload.new;
+
+          const isRelated =
+            (newMessage.sender_id === userID &&
+              newMessage.receiver_id === friendID) ||
+            (newMessage.sender_id === friendID &&
+              newMessage.receiver_id === userID);
+
+          if (!isRelated) return;
+
+          console.log("New message received:", newMessage);
 
           queryClient.setQueryData(
             ["messages", userID, friendID],
@@ -39,27 +53,28 @@ function useGetMessages(userID, friendID, limit = 7) {
               if (!oldData) return { pages: [[newMessage]], pageParams: [1] };
 
               const allMessages = oldData.pages.flat();
-              const exists = allMessages.some(
-                (msg) => msg.id === newMessage.id
-              );
-              if (exists) return oldData;
+              if (allMessages.some((msg) => msg.id === newMessage.id))
+                return oldData;
 
               const updatedPages = [...oldData.pages];
-              updatedPages[updatedPages.length - 1] = [
-                ...updatedPages[updatedPages.length - 1],
+
+              const lastPageIndex = updatedPages.length - 1;
+              updatedPages[lastPageIndex] = [
+                ...updatedPages[lastPageIndex],
                 newMessage,
               ];
 
               return { ...oldData, pages: updatedPages };
-            }
+            },
           );
-        }
+        },
       )
       .subscribe();
 
-    return () => supabase.removeChannel(channel);
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [queryClient, userID, friendID]);
-
   const messages = useMemo(() => {
     if (!data?.pages) return [];
     const uniqueMessages = new Map();
@@ -71,7 +86,7 @@ function useGetMessages(userID, friendID, limit = 7) {
     });
 
     return Array.from(uniqueMessages.values()).sort(
-      (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      (a, b) => new Date(a.created_at) - new Date(b.created_at),
     );
   }, [data?.pages]);
 

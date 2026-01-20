@@ -17,32 +17,44 @@ function useGetUserFriends(userID) {
       .channel("friends-message-changes")
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "messages" },
+        { event: "INSERT", schema: "public", table: "messages" },
         async (payload) => {
-          if (payload.eventType === "INSERT") {
-            const newMessage = payload.new;
+          const newMessage = payload.new;
 
-            queryClient.setQueryData(["friends", userID], (oldData) => {
-              if (!oldData) return [];
+          if (
+            newMessage.sender_id !== userID &&
+            newMessage.receiver_id !== userID
+          )
+            return;
 
-              return oldData.map((friend) => {
-                if (
-                  friend.friend_id === newMessage.receiver_id ||
-                  friend.friend_id === newMessage.sender_id
-                ) {
-                  return { ...friend, last_message: newMessage };
-                }
-                return friend;
-              });
+          queryClient.setQueryData(["friends", userID], (oldData) => {
+            if (!oldData) return [];
+
+            const updatedData = oldData.map((friend) => {
+              const isRelevantFriend =
+                friend.friend_id === newMessage.receiver_id ||
+                friend.friend_id === newMessage.sender_id;
+
+              if (isRelevantFriend) {
+                return { ...friend, last_message: newMessage };
+              }
+              return friend;
             });
-          }
-        }
+
+            return [...updatedData].sort((a, b) => {
+              const timeA = new Date(a.last_message?.created_at || 0).getTime();
+              const timeB = new Date(b.last_message?.created_at || 0).getTime();
+              return timeB - timeA;
+            });
+          });
+        },
       )
       .subscribe();
 
-    return () => supabase.removeChannel(channel);
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [queryClient, userID]);
-
   return { data, isLoading, error };
 }
 
