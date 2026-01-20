@@ -26,10 +26,15 @@ function useGetMessages(userID, friendID, limit = 7) {
 
   useEffect(() => {
     const channel = supabase
-      .channel("message-changes")
+      .channel(`messages-${userID}-${friendID}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "messages" },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+          filter: `or(and(sender_id.eq.${userID},receiver_id.eq.${friendID}),and(sender_id.eq.${friendID},receiver_id.eq.${userID}))`,
+        },
         (payload) => {
           const newMessage = payload.new;
 
@@ -40,7 +45,7 @@ function useGetMessages(userID, friendID, limit = 7) {
 
               const allMessages = oldData.pages.flat();
               const exists = allMessages.some(
-                (msg) => msg.id === newMessage.id
+                (msg) => msg.id === newMessage.id,
               );
               if (exists) return oldData;
 
@@ -51,9 +56,9 @@ function useGetMessages(userID, friendID, limit = 7) {
               ];
 
               return { ...oldData, pages: updatedPages };
-            }
+            },
           );
-        }
+        },
       )
       .subscribe();
 
@@ -71,7 +76,7 @@ function useGetMessages(userID, friendID, limit = 7) {
     });
 
     return Array.from(uniqueMessages.values()).sort(
-      (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      (a, b) => new Date(a.created_at) - new Date(b.created_at),
     );
   }, [data?.pages]);
 
